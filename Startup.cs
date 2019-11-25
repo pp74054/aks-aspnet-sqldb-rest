@@ -53,7 +53,7 @@ namespace ClaimsApi
                     Title = "Claims API",
                     Description = "An example ASP.NET Core Web API that retrieves medical claims records from a SQL server database",
                     TermsOfService =  new Uri ("http://google.com"),
-                    Contact = new Contact
+                    Contact = new OpenApiContact
                     {
                         Name = "Microsoft",
                         Url = new Uri("https://github.com/ganrad/aks-aspnet-sqldb-rest")
