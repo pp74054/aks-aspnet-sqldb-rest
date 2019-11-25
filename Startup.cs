@@ -22,6 +22,7 @@ using Microsoft.Extensions.Options;
 using ClaimsApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Hosting; // ID11092019.n
+using Microsoft.OpenApi.Models;
 
 namespace ClaimsApi
 {
@@ -46,21 +47,21 @@ namespace ClaimsApi
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1",new Info 
+                c.SwaggerDoc("v1",new OpenApiInfo
                 {
                     Version = "v1", 
                     Title = "Claims API",
                     Description = "An example ASP.NET Core Web API that retrieves medical claims records from a SQL server database",
-                    TermsOfService = "Education purposes only",
+                    TermsOfService =  new Uri ("http://google.com"),
                     Contact = new Contact
                     {
                         Name = "Microsoft",
-                        Url = "https://github.com/ganrad/aks-aspnet-sqldb-rest"
+                        Url = new Uri("https://github.com/ganrad/aks-aspnet-sqldb-rest")
                     },
-                    License = new License
+                    License = new OpenApiLicense
                     {
                         Name = "Apache 2.0",
-                        Url = "https://www.apache.org/licenses/LICENSE-2.0"
+                        Url = new Uri("https://www.apache.org/licenses/LICENSE-2.0")
                     }                    
                 });
 
