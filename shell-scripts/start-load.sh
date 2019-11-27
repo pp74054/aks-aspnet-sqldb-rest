@@ -1,6 +1,6 @@
 #! /bin/bash
 svcIpAddress=13.91.140.67
-dataDir=$3
+dataDir=./test-data
 counter=10
 
 echo "***** Starting Functional Test *****"
