@@ -1,5 +1,5 @@
 #! /bin/bash
-svcIpAddress=$2
+svcIpAddress=13.91.140.67
 dataDir=$3
 counter=1
 
