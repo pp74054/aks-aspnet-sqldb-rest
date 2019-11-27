@@ -18,7 +18,8 @@ echo
 ## Get all claims
 echo -e "***** Retrieving all claims *****"
 # curl -i -k https://grclaimsapi.azurewebsites.net/api/claims/
-hcode=$(curl --connect-timeout 5 --write-out \\n%{http_code}\\n --silent --output tmp.out http://$svcIpAddress/api/v1/claims/ | awk '{if(NR==2) print $0}')
+#hcode=$(curl --connect-timeout 5 --write-out \\n%{http_code}\\n --silent --output tmp.out http://$svcIpAddress/api/v1/claims/ | awk '{if(NR==2) print $0}')
+hcode=$(curl --connect-timeout 5 --write-out \\n%{http_code}\\n --silent --output tmp.out http://13.91.140.67/api/v1/claims/ | awk '{if(NR==2) print $0}')
 if [[ $hcode -ne 200 ]];
 then
   echo "Encountered http status code = $hcode, on getAllClaims Operation. Exiting ...."
@@ -42,7 +43,8 @@ do
 
   ## Add a claim for institutional provider -----------------------------
   echo -e "***** Inserting claim for institutional provider *****"
-  clmid=`curl -X POST -H "Content-Type: application/json" --connect-timeout 5 -d "@$dataDir/claim01.json" http://$svcIpAddress/api/v1/claims/ | ./jq-linux64 '.claimItemId'`
+  #clmid=`curl -X POST -H "Content-Type: application/json" --connect-timeout 5 -d "@$dataDir/claim01.json" http://$svcIpAddress/api/v1/claims/ | ./jq-linux64 '.claimItemId'`
+  clmid=`curl -X POST -H "Content-Type: application/json" --connect-timeout 5 -d "@$dataDir/claim01.json" http://13.91.140.67/api/v1/claims/ | ./jq-linux64 '.claimItemId'`
 
   if [ -z "$clmid" ]
   then
@@ -66,7 +68,8 @@ do
 
   # Update the claim
   echo -e "***** Updating the claim [$clmid] for institutional provider *****"
-  hcode=$(curl -X PUT -H "Content-Type: application/json" --write-out %{http_code} --data "$record" --connect-timeout 5 http://$svcIpAddress/api/v1/claims/$clmid)
+  #hcode=$(curl -X PUT -H "Content-Type: application/json" --write-out %{http_code} --data "$record" --connect-timeout 5 http://$svcIpAddress/api/v1/claims/$clmid)
+  hcode=$(curl -X PUT -H "Content-Type: application/json" --write-out %{http_code} --data "$record" --connect-timeout 5 http://13.91.140.67/api/v1/claims/$clmid)
   if [[ $hcode -ne 204 ]];
   then
     echo "Encountered http status code = $hcode, on updateClaim Operation. Exiting ...."
