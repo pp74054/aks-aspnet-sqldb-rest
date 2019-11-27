@@ -84,7 +84,7 @@ do
 
   # Delete the institutional claim
   echo -e "***** Deleting the claim [$clmid] for institutional provider *****" 
-  hcode=$(curl -X DELETE --write-out \\n%{http_code}\\n --output tmp.out --connect-timeout 5 http://$svcIpAddress/api/v1/claims/$clmid | awk '{if(NR==2) print $0}') 
+  hcode=$(curl -X DELETE --write-out \\n%{http_code}\\n --output tmp.out --connect-timeout 5 http://13.91.140.67/api/v1/claims/$clmid | awk '{if(NR==2) print $0}') 
   if [[ $hcode -ne 200 ]];
   then
     echo "Encountered http status code = $hcode, on deleteClaim Operation. Exiting ...."
@@ -103,7 +103,7 @@ do
 
   ## Add a claim for professional provider -----------------------------
   echo -e "***** Inserting claim for professional provider *****"
-  clmid=`curl -X POST -H "Content-Type: application/json" -d "@$dataDir/claim02.json" --connect-timeout 5 http://$svcIpAddress/api/v1/claims/ | ./jq-linux64 '.claimItemId'`
+  clmid=`curl -X POST -H "Content-Type: application/json" -d "@$dataDir/claim02.json" --connect-timeout 5 http://13.91.140.67/api/v1/claims/ | ./jq-linux64 '.claimItemId'`
 
   if [ -z "$clmid" ]
   then
@@ -127,7 +127,7 @@ do
 
   # Update the claim
   echo -e "***** Updating the claim [$clmid] for professional provider *****"
-  hcode=$(curl -X PUT -H "Content-Type: application/json" --write-out %{http_code} --data "$record" --connect-timeout 5 http://$svcIpAddress/api/v1/claims/$clmid)
+  hcode=$(curl -X PUT -H "Content-Type: application/json" --write-out %{http_code} --data "$record" --connect-timeout 5 http://13.91.140.67/api/v1/claims/$clmid)
   if [[ $hcode -ne 204 ]];
   then
     echo "Encountered http status code = $hcode, on updateClaim Operation. Exiting ...."
@@ -142,7 +142,7 @@ do
 
   # Delete the institutional claim
   echo -e "***** Deleting the claim [$clmid] for professional provider *****" 
-  hcode=$(curl -X DELETE --write-out \\n%{http_code}\\n --output tmp.out --connect-timeout 5 http://$svcIpAddress/api/v1/claims/$clmid | awk '{if(NR==2) print $0}') 
+  hcode=$(curl -X DELETE --write-out \\n%{http_code}\\n --output tmp.out --connect-timeout 5 http://13.91.140.67/api/v1/claims/$clmid | awk '{if(NR==2) print $0}') 
   if [[ $hcode -ne 200 ]];
   then
     echo "Encountered http status code = $hcode, on deleteClaim Operation. Exiting ...."
